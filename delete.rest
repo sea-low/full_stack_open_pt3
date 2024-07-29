@@ -1,0 +1,13 @@
+DELETE http://localhost:3001/api/persons/1
+###
+
+GET http://localhost:3001/api/persons/1
+###
+
+POST http://localhost:3001/api/persons HTTP/1.0.
+Content-Type: application/json
+
+{
+    "name": "sample",
+    "number": "Wed, 21 Oct 2015 18:27:50 GMT"
+}

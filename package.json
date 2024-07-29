@@ -1,0 +1,27 @@
+{
+  "name": "phonebook_backend",
+  "version": "1.0.0",
+  "description": "exercises for fso pt 3",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodeman index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sea-low/full_stack_open_pt3.git"
+  },
+  "author": "Chloe Prothro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sea-low/full_stack_open_pt3/issues"
+  },
+  "homepage": "https://github.com/sea-low/full_stack_open_pt3#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodeman": "^1.1.2"
+  }
+}
