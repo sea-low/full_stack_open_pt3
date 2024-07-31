@@ -19,7 +19,8 @@
   },
   "homepage": "https://github.com/sea-low/full_stack_open_pt3#readme",
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "nodeman": "^1.1.2"

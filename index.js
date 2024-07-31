@@ -1,6 +1,9 @@
 const http = require("http");
 const express = require("express");
 const app = express();
+const morgan = require("morgan");
+
+app.use(morgan("tiny"));
 
 let persons = [
   {
@@ -85,6 +88,29 @@ const generateId = () => {
 
 app.use(express.json());
 
+morgan.token("sirname", function (req, res) {
+  return "{ name: " + req.body["name"] + ", ";
+});
+morgan.token("telephone", function (req, res) {
+  return "number: " + req.body["number"] + " }";
+});
+
+app.use(
+  morgan(function (tokens, req, res) {
+    return [
+      tokens.method(req, res),
+      tokens.url(req, res),
+      tokens.status(req, res),
+      tokens.res(req, res, "content-length"),
+      "-",
+      tokens["response-time"](req, res),
+      "ms",
+      tokens.sirname(req, res),
+      tokens.telephone(req, res),
+    ].join(" ");
+  })
+);
+
 app.post("/api/persons", (request, response) => {
   const body = request.body;
 
@@ -108,6 +134,7 @@ app.post("/api/persons", (request, response) => {
   };
 
   persons = persons.concat(person);
+
   return response.json(person);
 });
 
