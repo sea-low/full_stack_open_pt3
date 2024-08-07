@@ -2,7 +2,13 @@ const http = require("http");
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
+const cors = require("cors");
 
+//to phonebook: cd ../full_stack_open_clo/part2/phonebook/
+//to fso:  cd ../../../fso_pt3/
+
+app.use(cors());
+app.use(express.static("dist"));
 app.use(morgan("tiny"));
 
 let persons = [
@@ -29,7 +35,7 @@ let persons = [
 ];
 
 app.get("/", (request, response) => {
-  response.send("<h1>Hello World!</h1>");
+  response.send("<h1>this is the phonebook boss</h1>");
 });
 
 app.get("/api/persons", (request, response) => {
@@ -138,7 +144,7 @@ app.post("/api/persons", (request, response) => {
   return response.json(person);
 });
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
