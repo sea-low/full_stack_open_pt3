@@ -2,6 +2,14 @@ POST http://localhost:3001/api/persons HTTP/1.1
 content-type: application/json
 
 {
-    "name": "Clo Prothro",
-    "number": "559-403-4913"
+    "name": "Claire Dangit",
+    "number": "559-4323"
+}
+###
+POST http://localhost:3001/api/info HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Claire Dangit",
+    "number": "559-4323"
 }
