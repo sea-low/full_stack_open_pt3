@@ -1,13 +1,21 @@
 require("dotenv").config();
 const http = require("http");
+const cors = require("cors");
+const morgan = require("morgan");
 const express = require("express");
 const app = express();
-const morgan = require("morgan");
-const cors = require("cors");
-
 const Person = require("./models/person");
 const url = process.env.MONGODB_URI;
 const password = process.argv[2];
+const errorHandler = (error, request, response, next) => {
+  console.error(error.message);
+
+  if (error.name === "CastError") {
+    return response.status(400).send({ error: "malformatted id" });
+  }
+
+  next(error);
+};
 
 app.use(cors());
 app.use(express.static("dist"));
@@ -29,7 +37,7 @@ app.get("/api/persons/:id", (request, response) => {
   });
 });
 
-app.delete("/api/persons/:id", (request, response, next) => {
+app.delete("/api/persons/:id", (error, request, response, next) => {
   Person.findByIdAndDelete(request.params.id)
     .then((result) => {
       response.status(204).end();
@@ -131,6 +139,7 @@ app.put("/api/persons/:id", (request, response, next) => {
     })
     .catch((error) => next(error));
 });
+app.use(errorHandler);
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
